@@ -10,7 +10,7 @@ const todoRouter = Router();
 
 todoRouter.route("/create-todo").post(createTodo);
 todoRouter.route("/get-all-todos").get(getAllTodos);
-todoRouter.route("/delete").delete(deleteTodo);
-todoRouter.route("/markdone").patch(markAsDone);
+todoRouter.route("/delete/:id").delete(deleteTodo);
+todoRouter.route("/markdone/:id").patch(markAsDone);
 
 export default todoRouter;

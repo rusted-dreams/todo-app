@@ -12,7 +12,7 @@ interface Todo {
 // create a todo endpoint
 export const createTodo = async (req: Request, res: Response) => {
   const todo: Todo = req.body;
-  const query: string = "INSERT INTO todo (title, description) VALUES ($1, $2)";
+  const query: string = "INSERT INTO todo (title) VALUES ($1)";
   try {
     await pool.query(query, [todo.title]);
     res.status(201).json({ message: "Todo created successfully" });
@@ -35,9 +35,11 @@ export const getAllTodos = async (req: Request, res: Response) => {
 //delete a todo
 export const deleteTodo = async (req: Request, res: Response) => {
   const query = "DELETE FROM todo WHERE id=$1";
-  const todo = req.body;
+  const id = req.params.id;
+  console.log(id);
+
   try {
-    await pool.query(query, [todo.id]);
+    await pool.query(query, [id]);
     res.status(201).json({ message: "todo deleted" });
   } catch (error) {
     res.status(500).json({ message: "error deleting todo" });
@@ -47,9 +49,9 @@ export const deleteTodo = async (req: Request, res: Response) => {
 // mark todo as done
 export const markAsDone = async (req: Request, res: Response) => {
   const query = "UPDATE todo SET completed=true WHERE id=$1";
-  const todo = req.body;
+  const id = req.params.id;
   try {
-    await pool.query(query, [todo.id]);
+    await pool.query(query, [id]);
     res.status(200).json({ message: "marked completed" });
   } catch (error) {
     res.status(500).json({ message: "couldn't mark complete" });
