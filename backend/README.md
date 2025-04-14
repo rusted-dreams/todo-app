@@ -95,5 +95,3 @@ docker run --name pgadmin \
 - give a name of your choice to the server
 - in the conncetions tab in the hostname/address field put `host.docker.internal` so that it can access the pg-instance running in your machine which is outside the docker container of pgadmin.
 - enter `username` as postgres and your postgres password and click `confirm` to connect. 
-
-### now add prisma orm
